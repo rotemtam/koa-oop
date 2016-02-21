@@ -3,7 +3,7 @@
 const BaseController = require('../lib/koa-oop')
   , json = require('koa-json');
 
-const predicates = require('../lib/predicates');
+const requireQueryString = require('../predicates/require-query-string');
 
 class RootCtrl extends BaseController {
 
@@ -12,13 +12,13 @@ class RootCtrl extends BaseController {
     super();
 
     this.addMiddleware(json())
-        .addMethod('get', '/a/:id', predicates.requireQueryString(this.a))
+        .addMethod('get', '/a/:id', requireQueryString(this.a))
         .addMethod('get', '/b/:id', this.b)
         .addController('/second', require('./second'))
   }
 
   *a() {
-    this.body = {a:1,b:2,c:3}
+    this.body = {a:1, b:2, c:3}
   }
 
   *b() {

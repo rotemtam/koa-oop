@@ -17,6 +17,27 @@ npm install
 node index.js
 ```
 
+## test
+
+```
+mocha tests/
+```
+
+## use predicate factory to create logic decorators
+
+```js
+'use strict';
+
+const factory = require('../lib/predicate-factory')
+
+function hasQString() {
+  return Object.keys(this.query).length > 0
+}
+
+module.exports =  factory(hasQString, 403, 'Must have query string');
+
+```
+
 ## example controller
 
 ```js
